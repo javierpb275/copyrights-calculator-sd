@@ -1,4 +1,4 @@
-export const sales = [
+const sales = [
   {
     id: 1,
     quantity: 10,
@@ -20,3 +20,5 @@ export const sales = [
     bookId: 4,
   },
 ];
+
+export default sales;
