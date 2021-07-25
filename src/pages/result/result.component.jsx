@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./result.styles.css";
 import ResultTable from "../../components/result-table/result-table.component";
-import sales from "../../mock-api/sales";
 
 class Result extends Component {
   constructor() {
@@ -12,7 +11,9 @@ class Result extends Component {
   }
 
   componentDidMount() {
-    this.setState({ sales });
+    fetch("./sales.json")
+      .then((response) => response.json())
+      .then((data) => this.setState({ sales: data }));
   }
 
   render() {

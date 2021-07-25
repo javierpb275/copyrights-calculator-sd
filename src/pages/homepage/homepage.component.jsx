@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./homepage.styles.css";
 import DataTable from "../../components/data-table/data-table.component";
-import books from "../../mock-api/books";
 
 class Homepage extends Component {
   constructor() {
@@ -12,7 +11,9 @@ class Homepage extends Component {
   }
 
   componentDidMount() {
-    this.setState({ books });
+    fetch("./books.json")
+      .then((response) => response.json())
+      .then((data) => this.setState({ books: data }));
   }
 
   render() {
