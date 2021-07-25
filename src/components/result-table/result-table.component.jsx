@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import "./result-table.styles.css";
 
 class ResultTable extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       rows: [],
       total: 0,
@@ -11,7 +11,7 @@ class ResultTable extends Component {
   }
 
   render() {
-    const { sales } = this.props;
+    //const { sales } = this.props;
     return (
       <div className="result-table">
         <h2 className="result-table-title">RESULT TABLE</h2>

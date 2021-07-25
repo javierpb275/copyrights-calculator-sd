@@ -1,7 +1,7 @@
 import React from "react";
 import "./custom-select-option.styles.css";
 
-const CustomSelectOption = ({selectName}) => {
+const CustomSelectOption = ({selectName, options}) => {
   return (
     <select name={selectName}>
       <option value="123">123</option>

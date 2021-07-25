@@ -5,12 +5,11 @@ import CustomInput from "../custom-input/custom-input.component";
 import CustomSelectOption from "../custom-select-option/custom-select-option.component";
 
 class DataTable extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       authorName: "",
       percentage: 0,
-      authorBooks: [],
       selectedBooks: [],
       startDate: "",
       endDate: "",
@@ -18,7 +17,11 @@ class DataTable extends Component {
   }
 
   render() {
-    const { books } = this.props;
+    const {authorName} = this.state;
+    const {books} = this.props;
+    const authorBooks = books.filter(book =>
+      book.author.toLowerCase().includes(authorName.toLowerCase()));
+      console.log(authorBooks);
     return (
       <div className="data-table">
         <h2 className="data-table-title">DATA TABLE</h2>
@@ -28,6 +31,7 @@ class DataTable extends Component {
             inputType={"text"}
             inputPlaceholder={"Nombre de autor..."}
             inputName={"nombre-de-autor"}
+            handleChange={e => this.setState({authorName: e.target.value })}
           />
         </div>
         <div>
@@ -42,7 +46,7 @@ class DataTable extends Component {
         <div>
           INTRODUCE LOS ISBN DE LOS LIBROS SOBRE LOS QUE VAS A REALIZAR EL
           CÁLCULO:{" "}
-          <CustomSelectOption selectName={'book-selected'}/>
+          <CustomSelectOption selectName={'book-selected'} options={authorBooks}/>
           <CustomButton buttonName={"AÑADIR"} />
         </div>
         <div>INTRODUCE LAS FECHAS DE LA LIQUIDACIÓN: </div>
