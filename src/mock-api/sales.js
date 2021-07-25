@@ -19,6 +19,26 @@ const sales = [
     quantity: 40,
     bookId: 4,
   },
+  {
+    id: 5,
+    quantity: 50,
+    bookId: 5,
+  },
+  {
+    id: 6,
+    quantity: 60,
+    bookId: 6,
+  },
+  {
+    id: 7,
+    quantity: 70,
+    bookId: 7,
+  },
+  {
+    id: 8,
+    quantity: 80,
+    bookId: 8,
+  },
 ];
 
 export default sales;

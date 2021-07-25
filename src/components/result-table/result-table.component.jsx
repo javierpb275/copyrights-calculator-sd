@@ -15,7 +15,6 @@ class ResultTable extends Component {
     return (
       <div className="result-table">
         <h2 className="result-table-title">RESULT TABLE</h2>
-        {sales[0].quantity}
       </div>
     );
   }

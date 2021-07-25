@@ -7,9 +7,10 @@ class DataTable extends Component {
   constructor() {
     super();
     this.state = {
-      author: "",
+      authorName: "",
       percentage: 0,
-      isbns: [],
+      authorBooks: [],
+      selectedBooks: [],
       startDate: "",
       endDate: "",
     };
@@ -53,7 +54,6 @@ class DataTable extends Component {
           <CustomInput inputType={"date"} inputName={"fecha-fin"} />
         </div>
         <CustomButton buttonName={"CALCULAR"} />
-        {books[0].title}
       </div>
     );
   }
