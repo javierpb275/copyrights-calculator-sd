@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./data-table.styles.css";
 import CustomButton from "../custom-button/custom-button.component";
 import CustomInput from "../custom-input/custom-input.component";
+import CustomSelectOption from "../custom-select-option/custom-select-option.component";
 
 class DataTable extends Component {
   constructor() {
@@ -41,11 +42,7 @@ class DataTable extends Component {
         <div>
           INTRODUCE LOS ISBN DE LOS LIBROS SOBRE LOS QUE VAS A REALIZAR EL
           CÁLCULO:{" "}
-          <CustomInput
-            inputType={"text"}
-            inputPlaceholder={"isbn..."}
-            inputName={"isbn"}
-          />
+          <CustomSelectOption selectName={'book-selected'}/>
           <CustomButton buttonName={"AÑADIR"} />
         </div>
         <div>INTRODUCE LAS FECHAS DE LA LIQUIDACIÓN: </div>
