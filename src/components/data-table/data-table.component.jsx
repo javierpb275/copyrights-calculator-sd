@@ -13,22 +13,10 @@ class DataTable extends Component {
       selectedBooks: [],
       startDate: "",
       endDate: "",
-      authorBooks: [],
     };
   }
 
-  searchAuthorBooks = (e) => {
-    const { books } = this.props;
-    this.setState({ authorName: e.target.value });
-    const { authorName } = this.state;
-    const authorBooks = books.filter((book) =>
-      book.author.toLowerCase().includes(authorName.toLowerCase())
-    );
-    this.setState({ authorBooks });
-  };
-
   render() {
-    const { authorBooks } = this.state;
     return (
       <div className="data-table">
         <h2 className="data-table-title">DATA TABLE</h2>
@@ -38,7 +26,6 @@ class DataTable extends Component {
             inputType={"text"}
             inputPlaceholder={"Nombre de autor..."}
             inputName={"nombre-de-autor"}
-            handleChange={this.searchAuthorBooks}
           />
         </div>
         <div>
@@ -52,11 +39,7 @@ class DataTable extends Component {
         </div>
         <div>
           INTRODUCE LOS ISBN DE LOS LIBROS SOBRE LOS QUE VAS A REALIZAR EL
-          CÁLCULO:{" "}
-          <CustomSelectOption
-            selectName={"book-selected"}
-            options={authorBooks}
-          />
+          CÁLCULO: <CustomSelectOption selectName={"book-selected"} />
           <CustomButton buttonName={"AÑADIR"} />
         </div>
         <div>INTRODUCE LAS FECHAS DE LA LIQUIDACIÓN: </div>
