@@ -17,8 +17,7 @@ class Homepage extends Component {
   }
 
   render() {
-    const { products} = this.state;
-    console.log(products);
+    const { products } = this.state;
     return (
       <div className="homepage">
         <h2 className="homepage-title">INTRODUZCA LOS DATOS AQUÍ:</h2>
