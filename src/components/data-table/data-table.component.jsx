@@ -13,30 +13,34 @@ class DataTable extends Component {
       selectedProducts: [],
       startDate: "",
       endDate: "",
+      isbn: "",
     };
   }
 
-  addProductByIsbn = (e) => {
-    const {products} = this.props;
-    const {selectedProducts} = this.state;
-    const isbn = "111-11-1111-111-1";
-    const repeatedProduct = selectedProducts.find(selectedProduct => selectedProduct.referencia === isbn);
+  addProductByIsbn = (isbn) => {
+    const { products } = this.props;
+    const { selectedProducts } = this.state;
+    const repeatedProduct = selectedProducts.find(
+      (selectedProduct) => selectedProduct.referencia === isbn
+    );
     if (repeatedProduct) {
-      return console.log('you already added that product')
+      return console.log("you already added that product");
     } else {
-    const foundProduct = products.find(product => product.referencia === isbn);
-    if(!foundProduct) {
-      return console.log('incorrect isbn');
-    } else {
-      this.setState({
-        selectedProducts: [...selectedProducts, ...[foundProduct]]
-      })
+      const foundProduct = products.find(
+        (product) => product.referencia === isbn
+      );
+      if (!foundProduct) {
+        return console.log("incorrect isbn");
+      } else {
+        this.setState({
+          selectedProducts: [...selectedProducts, ...[foundProduct]],
+        });
+      }
     }
-  }
-  }
+  };
 
   render() {
-    const {selectedProducts} = this.state;
+    const { selectedProducts, isbn } = this.state;
     return (
       <div className="data-table">
         <h2 className="data-table-title">DATA TABLE</h2>
@@ -46,6 +50,7 @@ class DataTable extends Component {
             inputType={"text"}
             inputPlaceholder={"Nombre de autor..."}
             inputName={"nombre-de-autor"}
+            handleChange={(e) => this.setState({ authorName: e.target.value })}
           />
         </div>
         <div>
@@ -54,24 +59,39 @@ class DataTable extends Component {
             inputType={"text"}
             inputPlaceholder={"% pactado..."}
             inputName={"porcentage-pactado"}
+            handleChange={(e) => this.setState({ percentage: e.target.value })}
           />
           %
         </div>
         <div>
           INTRODUCE LOS ISBN DE LOS LIBROS SOBRE LOS QUE VAS A REALIZAR EL
-          CÁLCULO: 
+          CÁLCULO:
           <CustomInput
             inputType={"text"}
             inputPlaceholder={"isbn..."}
             inputName={"isbn"}
+            handleChange={(e) => this.setState({ isbn: e.target.value })}
           />
-          <CustomButton buttonName={"AÑADIR"} handleClick={this.addProductByIsbn}/>
-          <CustomOrderList items={selectedProducts}/>
+          <CustomButton
+            buttonName={"AÑADIR"}
+            handleClick={this.addProductByIsbn}
+            argument={isbn}
+          />
+          <CustomOrderList items={selectedProducts} />
         </div>
         <div>INTRODUCE LAS FECHAS DE LA LIQUIDACIÓN: </div>
         <div>
-          <CustomInput inputType={"date"} inputName={"fecha-origen"} /> A{" "}
-          <CustomInput inputType={"date"} inputName={"fecha-fin"} />
+          <CustomInput
+            inputType={"date"}
+            inputName={"fecha-origen"}
+            handleChange={(e) => this.setState({ startDate: e.target.value })}
+          />{" "}
+          A{" "}
+          <CustomInput
+            inputType={"date"}
+            inputName={"fecha-fin"}
+            handleChange={(e) => this.setState({ endDate: e.target.value })}
+          />
         </div>
         <CustomButton buttonName={"CALCULAR"} />
       </div>
