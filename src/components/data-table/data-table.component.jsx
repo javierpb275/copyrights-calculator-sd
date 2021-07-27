@@ -14,28 +14,36 @@ class DataTable extends Component {
       startDate: "",
       endDate: "",
       isbn: "",
+      products: [],
     };
   }
 
-  addProductByIsbn = (isbn) => {
-    const { products } = this.props;
-    const { selectedProducts } = this.state;
-    const repeatedProduct = selectedProducts.find(
-      (selectedProduct) => selectedProduct.referencia === isbn
-    );
-    if (repeatedProduct) {
-      return console.log("you already added that product");
-    } else {
-      const foundProduct = products.find(
-        (product) => product.referencia === isbn
+  addProductByIsbn = async (isbn) => {
+    try {
+      const response = await fetch(`./products.json`);
+      const data = await response.json();
+      this.setState({ products: data });
+
+      const { selectedProducts, products } = this.state;
+      const repeatedProduct = selectedProducts.find(
+        (selectedProduct) => selectedProduct.referencia === isbn
       );
-      if (!foundProduct) {
-        return console.log("incorrect isbn");
+      if (repeatedProduct) {
+        return console.log("you already added that product");
       } else {
-        this.setState({
-          selectedProducts: [...selectedProducts, ...[foundProduct]],
-        });
+        const foundProduct = products.find(
+          (product) => product.referencia === isbn
+        );
+        if (!foundProduct) {
+          return console.log("incorrect isbn");
+        } else {
+          this.setState({
+            selectedProducts: [...selectedProducts, ...[foundProduct]],
+          });
+        }
       }
+    } catch (error) {
+      console.log("ERROR!", error);
     }
   };
 
