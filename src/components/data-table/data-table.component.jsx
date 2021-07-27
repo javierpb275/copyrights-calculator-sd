@@ -47,8 +47,20 @@ class DataTable extends Component {
     }
   };
 
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   render() {
-    const { selectedProducts, isbn } = this.state;
+    const {
+      isbn,
+      authorName,
+      percentage,
+      selectedProducts,
+      startDate,
+      endDate,
+    } = this.state;
+    const { loadTableData } = this.props;
     return (
       <div className="data-table">
         <h2 className="data-table-title">DATA TABLE</h2>
@@ -57,8 +69,8 @@ class DataTable extends Component {
           <CustomInput
             inputType={"text"}
             inputPlaceholder={"Nombre de autor..."}
-            inputName={"nombre-de-autor"}
-            handleChange={(e) => this.setState({ authorName: e.target.value })}
+            inputName={"authorName"}
+            handleChange={this.handleChange}
           />
         </div>
         <div>
@@ -66,8 +78,8 @@ class DataTable extends Component {
           <CustomInput
             inputType={"text"}
             inputPlaceholder={"% pactado..."}
-            inputName={"porcentage-pactado"}
-            handleChange={(e) => this.setState({ percentage: e.target.value })}
+            inputName={"percentage"}
+            handleChange={this.handleChange}
           />
           %
         </div>
@@ -78,7 +90,7 @@ class DataTable extends Component {
             inputType={"text"}
             inputPlaceholder={"isbn..."}
             inputName={"isbn"}
-            handleChange={(e) => this.setState({ isbn: e.target.value })}
+            handleChange={this.handleChange}
           />
           <CustomButton
             buttonName={"AÑADIR"}
@@ -91,17 +103,27 @@ class DataTable extends Component {
         <div>
           <CustomInput
             inputType={"date"}
-            inputName={"fecha-origen"}
-            handleChange={(e) => this.setState({ startDate: e.target.value })}
+            inputName={"startDate"}
+            handleChange={this.handleChange}
           />{" "}
           A{" "}
           <CustomInput
             inputType={"date"}
-            inputName={"fecha-fin"}
-            handleChange={(e) => this.setState({ endDate: e.target.value })}
+            inputName={"endDate"}
+            handleChange={this.handleChange}
           />
         </div>
-        <CustomButton buttonName={"CALCULAR"} />
+        <CustomButton
+          buttonName={"CALCULAR"}
+          handleClick={loadTableData}
+          argument={{
+            authorName,
+            percentage,
+            selectedProducts,
+            startDate,
+            endDate,
+          }}
+        />
       </div>
     );
   }

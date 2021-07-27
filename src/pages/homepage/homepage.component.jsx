@@ -3,25 +3,17 @@ import "./homepage.styles.css";
 import DataTable from "../../components/data-table/data-table.component";
 
 class Homepage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      products: [],
-    };
-  }
-
-  componentDidMount() {
-    fetch(`./products.json`)
-      .then((response) => response.json())
-      .then((data) => this.setState({ products: data }));
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
   render() {
-    const { products } = this.state;
+    const { loadTableData } = this.props;
     return (
       <div className="homepage">
         <h2 className="homepage-title">INTRODUZCA LOS DATOS AQUÍ:</h2>
-        <DataTable products={products} />
+        <DataTable loadTableData={loadTableData} />
       </div>
     );
   }
