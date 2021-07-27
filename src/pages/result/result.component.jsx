@@ -3,16 +3,17 @@ import "./result.styles.css";
 import ResultTable from "../../components/result-table/result-table.component";
 
 class Result extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
   }
 
   render() {
+    const {tableData} = this.props;
     return (
       <div className="result-page">
         <h2 className="result-page-title">RESULTADO:</h2>
-        <ResultTable />
+        <ResultTable tableData={tableData}/>
       </div>
     );
   }

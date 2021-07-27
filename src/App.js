@@ -31,7 +31,7 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.tableData);
+    const {tableData} = this.state;
     return (
       <div>
         <div className="header-app">
@@ -39,7 +39,7 @@ class App extends Component {
         </div>
         <div className="App">
           <Homepage loadTableData={this.loadTableData} />
-          <Result />
+          <Result tableData={tableData}/>
         </div>
       </div>
     );

@@ -11,10 +11,11 @@ class ResultTable extends Component {
   }
 
   render() {
-    //const { sales } = this.props;
+    const { tableData } = this.props;
     return (
       <div className="result-table">
         <h2 className="result-table-title">RESULT TABLE</h2>
+        <p>{tableData.authorName}</p>
       </div>
     );
   }
