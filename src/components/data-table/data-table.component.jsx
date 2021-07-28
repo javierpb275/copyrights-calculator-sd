@@ -35,7 +35,7 @@ class DataTable extends Component {
           (product) => product.referencia === isbn
         );
         if (!foundProduct) {
-          return console.log("incorrect isbn");
+          return console.log("book not found!");
         } else {
           this.setState({
             selectedProducts: [...selectedProducts, ...[foundProduct]],
@@ -50,6 +50,19 @@ class DataTable extends Component {
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  onDatesChange = (e) => {
+    if (this.state.selectedProducts.length) {
+      if (e.target.name === "startDate") {
+        e.target.value = this.state.startDate;
+      } else if (e.target.name === "endDate") {
+        e.target.value = this.state.endDate;
+      }
+      return console.log('you cannot change a date once a book has been added!')
+    } else {
+      this.setState({ [e.target.name]: e.target.value });
+    }
+  }
 
   render() {
     const {
@@ -83,6 +96,20 @@ class DataTable extends Component {
           />
           %
         </div>
+        <div>INTRODUCE LAS FECHAS DE LA LIQUIDACIÓN: </div>
+        <div>
+          <CustomInput
+            inputType={"date"}
+            inputName={"startDate"}
+            handleChange={this.onDatesChange}
+          />{" "}
+          A{" "}
+          <CustomInput
+            inputType={"date"}
+            inputName={"endDate"}
+            handleChange={this.onDatesChange}
+          />
+        </div>
         <div>
           INTRODUCE LOS ISBN DE LOS LIBROS SOBRE LOS QUE VAS A REALIZAR EL
           CÁLCULO:
@@ -98,20 +125,6 @@ class DataTable extends Component {
             argument={isbn}
           />
           <CustomOrderList items={selectedProducts} />
-        </div>
-        <div>INTRODUCE LAS FECHAS DE LA LIQUIDACIÓN: </div>
-        <div>
-          <CustomInput
-            inputType={"date"}
-            inputName={"startDate"}
-            handleChange={this.handleChange}
-          />{" "}
-          A{" "}
-          <CustomInput
-            inputType={"date"}
-            inputName={"endDate"}
-            handleChange={this.handleChange}
-          />
         </div>
         <CustomButton
           buttonName={"CALCULAR"}
