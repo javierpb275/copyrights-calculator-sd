@@ -14,30 +14,49 @@ class ResultTable extends Component {
     const { tableData } = this.props;
     return (
       <div className="result-table">
-        <h2 className="result-table-title">RESULT TABLE</h2>
-        <p>AUTOR: {tableData.authorName}</p>
-        <p>
-          PERIODO DE LIQUIDACIÓN:{" "}
-          {tableData.startDate.split("-").reverse().join("/")} a{" "}
-          {tableData.endDate.split("-").reverse().join("/")}
-        </p>
+        <div className="author-dates-table-container">
+          <table className="table-results">
+            <tr className="table-r-results">
+              <th className="table-h-results">AUTOR</th>
+              <th className="table-h-results">PERIODO DE LIQUIDACIÓN</th>
+            </tr>
+            <tr className="table-r-results">
+              <td className="table-d-results">{tableData.authorName}</td>
+              <td className="table-d-results">
+                {tableData.startDate.split("-").reverse().join("/")} A{" "}
+                {tableData.endDate.split("-").reverse().join("/")}
+              </td>
+            </tr>
+          </table>
+        </div>
         <h2 className="liquidacion-details">DETALLES DE LA LIQUIDACIÓN:</h2>
-        {tableData.selectedProducts.map((selectedProduct) => (
-          <div key={selectedProduct.id}>
-            <p>ISBN: {selectedProduct.referencia}</p>
-            <p>TÍTULO: {selectedProduct.descripcion}</p>
-            <p>PRECIO DEL LIBRO: {selectedProduct.base_imponible}€</p>
-            <p>NÚMERO DE VENTAS: {selectedProduct.cantidad}</p>
-            <p>PORCENTAGE: {tableData.percentage}%</p>
-            <p>
-              DERECHOS DEVENGADOS:{" "}
-              {selectedProduct.base_imponible *
-                selectedProduct.cantidad *
-                (tableData.percentage / 100)}
-              €
-            </p>
-          </div>
-        ))}
+        <table className="table-results">
+          <tr className="table-r-results">
+            <th className="table-h-results">ISBN</th>
+            <th className="table-h-results">TÍTULO</th>
+            <th className="table-h-results">PRECIO DEL LIBRO</th>
+            <th className="table-h-results">NÚMERO DE VENTAS</th>
+            <th className="table-h-results">PORCENTAGE</th>
+            <th className="table-h-results">DERECHOS DEVENGADOS</th>
+          </tr>
+          {tableData.selectedProducts.map((selectedProduct) => (
+            <tr key={selectedProduct.id} className="table-r-results">
+              <td className="table-d-results">{selectedProduct.referencia}</td>
+              <td className="table-d-results">{selectedProduct.descripcion}</td>
+              <td className="table-d-results">
+                {selectedProduct.base_imponible}€
+              </td>
+              <td className="table-d-results">{selectedProduct.cantidad}</td>
+              <td className="table-d-results">{tableData.percentage}%</td>
+              <td className="table-d-results">
+                {selectedProduct.base_imponible *
+                  selectedProduct.cantidad *
+                  (tableData.percentage / 100)}
+                €
+              </td>
+            </tr>
+          ))}
+        </table>
       </div>
     );
   }

@@ -12,7 +12,6 @@ class Result extends Component {
     const { tableData } = this.props;
     return (
       <div className="result-page">
-        <h2 className="result-page-title">LIQUIDACIÓN DE DERECHOS DE AUTOR:</h2>
         <ResultTable tableData={tableData} />
       </div>
     );

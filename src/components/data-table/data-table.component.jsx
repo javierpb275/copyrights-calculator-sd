@@ -58,11 +58,13 @@ class DataTable extends Component {
       } else if (e.target.name === "endDate") {
         e.target.value = this.state.endDate;
       }
-      return console.log('you cannot change a date once a book has been added!')
+      return console.log(
+        "you cannot change a date once a book has been added!"
+      );
     } else {
       this.setState({ [e.target.name]: e.target.value });
     }
-  }
+  };
 
   render() {
     const {
@@ -76,67 +78,70 @@ class DataTable extends Component {
     const { loadTableData } = this.props;
     return (
       <div className="data-table">
-        <h2 className="data-table-title">DATA TABLE</h2>
-        <div>
-          INTRODUCE EL NOMBRE DEL AUTOR:{" "}
-          <CustomInput
-            inputType={"text"}
-            inputPlaceholder={"Nombre de autor..."}
-            inputName={"authorName"}
-            handleChange={this.handleChange}
-          />
-        </div>
-        <div>
-          INTRODUCE EL % DE DERECHOS DE AUTOR PACTADOS:{" "}
-          <CustomInput
-            inputType={"text"}
-            inputPlaceholder={"% pactado..."}
-            inputName={"percentage"}
-            handleChange={this.handleChange}
-          />
-          %
-        </div>
-        <div>INTRODUCE LAS FECHAS DE LA LIQUIDACIÓN: </div>
-        <div>
-          <CustomInput
-            inputType={"date"}
-            inputName={"startDate"}
-            handleChange={this.onDatesChange}
-          />{" "}
-          A{" "}
-          <CustomInput
-            inputType={"date"}
-            inputName={"endDate"}
-            handleChange={this.onDatesChange}
-          />
-        </div>
-        <div>
-          INTRODUCE LOS ISBN DE LOS LIBROS SOBRE LOS QUE VAS A REALIZAR EL
-          CÁLCULO:
-          <CustomInput
-            inputType={"text"}
-            inputPlaceholder={"isbn..."}
-            inputName={"isbn"}
-            handleChange={this.handleChange}
-          />
+        <table className="table-data">
+          <tr className="table-r-data">
+            INTRODUCE EL NOMBRE DEL AUTOR:{" "}
+            <CustomInput
+              inputType={"text"}
+              inputPlaceholder={"Nombre de autor..."}
+              inputName={"authorName"}
+              handleChange={this.handleChange}
+            />
+          </tr>
+          <tr className="table-r-data">
+            INTRODUCE EL % DE DERECHOS DE AUTOR PACTADOS:{" "}
+            <CustomInput
+              inputType={"text"}
+              inputPlaceholder={"% pactado..."}
+              inputName={"percentage"}
+              handleChange={this.handleChange}
+            />
+            %
+          </tr>
+          <tr className="table-r-data">
+            INTRODUCE LAS FECHAS DE LA LIQUIDACIÓN:
+            <CustomInput
+              inputType={"date"}
+              inputName={"startDate"}
+              handleChange={this.onDatesChange}
+            />{" "}
+            A{" "}
+            <CustomInput
+              inputType={"date"}
+              inputName={"endDate"}
+              handleChange={this.onDatesChange}
+            />
+          </tr>
+          <tr className="table-r-data">
+            INTRODUCE LOS ISBN DE LOS LIBROS SOBRE LOS QUE VAS A REALIZAR EL
+            CÁLCULO:
+            <CustomInput
+              inputType={"text"}
+              inputPlaceholder={"isbn..."}
+              inputName={"isbn"}
+              handleChange={this.handleChange}
+            />
+            <CustomButton
+              buttonName={"AÑADIR"}
+              handleClick={this.addProductByIsbn}
+              argument={isbn}
+            />
+            <CustomOrderList items={selectedProducts} />
+          </tr>
+        </table>
+        <div className="calculate-button">
           <CustomButton
-            buttonName={"AÑADIR"}
-            handleClick={this.addProductByIsbn}
-            argument={isbn}
+            buttonName={"CALCULAR"}
+            handleClick={loadTableData}
+            argument={{
+              authorName,
+              percentage,
+              selectedProducts,
+              startDate,
+              endDate,
+            }}
           />
-          <CustomOrderList items={selectedProducts} />
         </div>
-        <CustomButton
-          buttonName={"CALCULAR"}
-          handleClick={loadTableData}
-          argument={{
-            authorName,
-            percentage,
-            selectedProducts,
-            startDate,
-            endDate,
-          }}
-        />
       </div>
     );
   }

@@ -1,3 +1,16 @@
-.data-table-title {
-  margin-top: 3%;
+.table-data {
+  margin-left: 200px;
+  background-color: whitesmoke;
+}
+.table-data,
+.table-r-data {
+  text-align: center;
+  border-collapse: collapse;
+  width: 75%;
+  justify-content: center;
+  border: 5px solid #ddd;
+  padding: 8px;
+}
+.calculate-button {
+  text-align: center;
 }
