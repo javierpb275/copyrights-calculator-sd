@@ -9,11 +9,11 @@ class Result extends Component {
   }
 
   render() {
-    const {tableData} = this.props;
+    const { tableData } = this.props;
     return (
       <div className="result-page">
-        <h2 className="result-page-title">RESULTADO:</h2>
-        <ResultTable tableData={tableData}/>
+        <h2 className="result-page-title">LIQUIDACIÓN DE DERECHOS DE AUTOR:</h2>
+        <ResultTable tableData={tableData} />
       </div>
     );
   }
