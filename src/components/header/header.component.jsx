@@ -1,5 +1,5 @@
 import React from "react";
-import "./header.styles.css";
+import "./header.styles.scss";
 import iberleyColexLogo from "../../assets/logos/iberley-colex.jpeg";
 
 const Header = () => {

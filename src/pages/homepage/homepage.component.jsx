@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./homepage.styles.css";
+import "./homepage.styles.scss";
 import DataTable from "../../components/data-table/data-table.component";
 
 class Homepage extends Component {

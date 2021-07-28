@@ -1,5 +1,5 @@
 import React from "react";
-import "./custom-input.styles.css";
+import "./custom-input.styles.scss";
 
 const CustomInput = ({ inputType, inputPlaceholder, inputName, handleChange }) => {
   return (

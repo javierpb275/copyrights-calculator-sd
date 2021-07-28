@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./result-table.styles.css";
+import "./result-table.styles.scss";
 
 class ResultTable extends Component {
   constructor(props) {

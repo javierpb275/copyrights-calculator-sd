@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./result.styles.css";
+import "./result.styles.scss";
 import ResultTable from "../../components/result-table/result-table.component";
 
 class Result extends Component {

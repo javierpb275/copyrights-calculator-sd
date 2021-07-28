@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./data-table.styles.css";
+import "./data-table.styles.scss";
 import CustomButton from "../custom-button/custom-button.component";
 import CustomInput from "../custom-input/custom-input.component";
 import CustomOrderList from "../custom-order-list/custom-order-list.component";

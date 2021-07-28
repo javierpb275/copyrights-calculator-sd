@@ -1,5 +1,5 @@
 import React from "react";
-import "./custom-order-list.styles.css";
+import "./custom-order-list.styles.scss";
 
 const CustomOrderList = ({ items }) => (
   <ol>
