@@ -4,6 +4,7 @@ import CustomButton from "../custom-button/custom-button.component";
 import CustomInput from "../custom-input/custom-input.component";
 import CustomOrderList from "../custom-order-list/custom-order-list.component";
 import Scroll from "../scroll/scroll.component";
+import { withRouter } from "react-router-dom";
 
 class DataTable extends Component {
   constructor(props) {
@@ -76,7 +77,7 @@ class DataTable extends Component {
       startDate,
       endDate,
     } = this.state;
-    const { loadTableData } = this.props;
+    const { loadTableData, history, match } = this.props;
     return (
       <div className="data-table">
         <table className="table-data">
@@ -128,11 +129,14 @@ class DataTable extends Component {
               argument={isbn}
             />
             <Scroll>
-            <CustomOrderList items={selectedProducts} />
+              <CustomOrderList items={selectedProducts} />
             </Scroll>
           </tr>
         </table>
-        <div className="calculate-button">
+        <div
+          className="calculate-button"
+          onClick={() => history.push(`${match.url}resultado`)}
+        >
           <CustomButton
             buttonName={"CALCULAR"}
             handleClick={loadTableData}
@@ -150,4 +154,4 @@ class DataTable extends Component {
   }
 }
 
-export default DataTable;
+export default withRouter(DataTable);

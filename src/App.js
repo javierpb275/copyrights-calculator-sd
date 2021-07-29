@@ -3,8 +3,7 @@ import "./App.css";
 import Homepage from "./pages/homepage/homepage.component";
 import Result from "./pages/result/result.component";
 import Header from "./components/header/header.component";
-
-//https://ui.dev/react-router-v4-pass-props-to-components/
+import { Route, Switch } from "react-router-dom";
 
 class App extends Component {
   constructor() {
@@ -33,16 +32,21 @@ class App extends Component {
   };
 
   render() {
-    const {tableData} = this.state;
+    const { tableData } = this.state;
     return (
-      <div>
-        <div className="header-app">
-          <Header />
-        </div>
-        <div className="App">
-          <Homepage loadTableData={this.loadTableData} />
-          <Result tableData={tableData}/>
-        </div>
+      <div className="App">
+        <Header />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => <Homepage loadTableData={this.loadTableData} />}
+          />
+          <Route
+            path="/resultado"
+            render={() => <Result tableData={tableData} />}
+          />
+        </Switch>
       </div>
     );
   }
