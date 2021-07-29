@@ -3,6 +3,7 @@ import "./data-table.styles.scss";
 import CustomButton from "../custom-button/custom-button.component";
 import CustomInput from "../custom-input/custom-input.component";
 import CustomOrderList from "../custom-order-list/custom-order-list.component";
+import Scroll from "../scroll/scroll.component";
 
 class DataTable extends Component {
   constructor(props) {
@@ -126,7 +127,9 @@ class DataTable extends Component {
               handleClick={this.addProductByIsbn}
               argument={isbn}
             />
+            <Scroll>
             <CustomOrderList items={selectedProducts} />
+            </Scroll>
           </tr>
         </table>
         <div className="calculate-button">

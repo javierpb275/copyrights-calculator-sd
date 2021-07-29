@@ -2,7 +2,7 @@ import React from "react";
 import "./custom-order-list.styles.scss";
 
 const CustomOrderList = ({ items }) => (
-  <ol>
+  <ol id="custom-order-list">
     {items.map((item) => (
       <li key={item.id}>{item.referencia}</li>
     ))}
