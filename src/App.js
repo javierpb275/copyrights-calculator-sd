@@ -4,6 +4,8 @@ import Homepage from "./pages/homepage/homepage.component";
 import Result from "./pages/result/result.component";
 import Header from "./components/header/header.component";
 
+//https://ui.dev/react-router-v4-pass-props-to-components/
+
 class App extends Component {
   constructor() {
     super();
