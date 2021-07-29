@@ -44,7 +44,7 @@ class ResultTable extends Component {
               <td className="table-d-results">{selectedProduct.referencia}</td>
               <td className="table-d-results">{selectedProduct.descripcion}</td>
               <td className="table-d-results">
-                {selectedProduct.base_imponible}€
+                {selectedProduct.precio}€
               </td>
               <td className="table-d-results">{selectedProduct.cantidad}</td>
               <td className="table-d-results">{tableData.percentage}%</td>

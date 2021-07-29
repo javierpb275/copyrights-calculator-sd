@@ -4,55 +4,55 @@
         "descripcion": "book1",
         "referencia": "111-11-1111-111-1",
         "cantidad": 1,
-        "base_imponible": 10
+        "precio": 10
     },
     {
         "id": 2,
         "descripcion": "book2",
         "referencia": "222-22-2222-222-2",
         "cantidad": 2,
-        "base_imponible": 20
+        "precio": 20
     },
     {
         "id": 3,
         "descripcion": "book3",
         "referencia": "333-33-3333-333-3",
         "cantidad": 3,
-        "base_imponible": 30
+        "precio": 30
     },
     {
         "id": 4,
         "descripcion": "book4",
         "referencia": "444-44-4444-444-4",
         "cantidad": 4,
-        "base_imponible": 40
+        "precio": 40
     },
     {
         "id": 5,
         "descripcion": "book5",
         "referencia": "555-55-5555-555-5",
         "cantidad": 5,
-        "base_imponible": 50
+        "precio": 50
     },
     {
         "id": 6,
         "descripcion": "book6",
         "referencia": "666-66-6666-666-6",
         "cantidad": 6,
-        "base_imponible": 60
+        "precio": 60
     },
     {
         "id": 7,
         "descripcion": "book7",
         "referencia": "777-77-7777-777-7",
         "cantidad": 7,
-        "base_imponible": 70
+        "precio": 70
     },
     {
         "id": 8,
         "descripcion": "book8",
         "referencia": "888-88-8888-888-8",
         "cantidad": 8,
-        "base_imponible": 80
+        "precio": 80
     }
 ]
