@@ -5,10 +5,7 @@ import CustomButton from "../custom-button/custom-button.component";
 class ResultTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      rows: [],
-      total: 0,
-    };
+    this.state = {};
   }
 
   printPdf = (id) => {
@@ -25,6 +22,26 @@ class ResultTable extends Component {
     WinPrint.close();
   };
 
+  calculateAccruedRights = (bookPrice, salesQuantity, percentage) => {
+    const result = bookPrice * salesQuantity * (percentage / 100);
+    return result;
+  };
+
+  calculateTotal = () => {
+    const { tableData } = this.props;
+    let result = 0;
+    let accruedRights = 0;
+    for (const selectedProduct of tableData.selectedProducts) {
+      accruedRights = this.calculateAccruedRights(
+        selectedProduct.precio,
+        selectedProduct.cantidad,
+        tableData.percentage
+      );
+      result += accruedRights;
+    }
+    return result;
+  };
+
   render() {
     const { tableData } = this.props;
     return (
@@ -39,7 +56,7 @@ class ResultTable extends Component {
               <tr className="table-r-results">
                 <td className="table-d-results">{tableData.authorName}</td>
                 <td className="table-d-results">
-                  {tableData.startDate.split("-").reverse().join("/")} A{" "}
+                  {tableData.startDate.split("-").reverse().join("/")} -{" "}
                   {tableData.endDate.split("-").reverse().join("/")}
                 </td>
               </tr>
@@ -67,20 +84,34 @@ class ResultTable extends Component {
                 <td className="table-d-results">{selectedProduct.cantidad}</td>
                 <td className="table-d-results">{tableData.percentage}%</td>
                 <td className="table-d-results">
-                  {selectedProduct.base_imponible *
-                    selectedProduct.cantidad *
-                    (tableData.percentage / 100)}
+                  {this.calculateAccruedRights(
+                    selectedProduct.precio,
+                    selectedProduct.cantidad,
+                    tableData.percentage
+                  ).toFixed(2)}
                   €
                 </td>
               </tr>
             ))}
+            <tr className="table-r-results">
+              <td className="table-d-results"></td>
+              <td className="table-d-results"></td>
+              <td className="table-d-results"></td>
+              <td className="table-d-results"></td>
+              <td className="table-d-results">TOTAL:</td>
+              <td className="table-d-results">
+                {this.calculateTotal().toFixed(2)}€
+              </td>
+            </tr>
           </table>
         </div>
-        <CustomButton
-          buttonName={"PDF"}
-          handleClick={this.printPdf}
-          argument={"result-table"}
-        />
+        <div className="pdf-button">
+          <CustomButton
+            buttonName={"PDF"}
+            handleClick={this.printPdf}
+            argument={"result-table"}
+          />
+        </div>
       </div>
     );
   }
