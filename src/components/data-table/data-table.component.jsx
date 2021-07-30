@@ -31,13 +31,15 @@ class DataTable extends Component {
         (selectedProduct) => selectedProduct.referencia === isbn
       );
       if (repeatedProduct) {
-        return console.log("you already added that product");
+        return alert("Ese ISBN ya fue añadido.");
       } else {
         const foundProduct = products.find(
           (product) => product.referencia === isbn
         );
         if (!foundProduct) {
-          return console.log("book not found!");
+          return alert(
+            "No se ha encontrado el libro que hace referencia al ISBN introducido."
+          );
         } else {
           this.setState({
             selectedProducts: [...selectedProducts, ...[foundProduct]],
@@ -60,9 +62,7 @@ class DataTable extends Component {
       } else if (e.target.name === "endDate") {
         e.target.value = this.state.endDate;
       }
-      return console.log(
-        "you cannot change a date once a book has been added!"
-      );
+      return alert("No puede cambiar las fechas una vez añadido un ISBN");
     } else {
       this.setState({ [e.target.name]: e.target.value });
     }
