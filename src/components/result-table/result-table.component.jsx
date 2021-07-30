@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./result-table.styles.scss";
 import CustomButton from "../custom-button/custom-button.component";
+//for download pdf:
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 class ResultTable extends Component {
   constructor(props) {
@@ -9,17 +12,16 @@ class ResultTable extends Component {
   }
 
   printPdf = (id) => {
-    let prtContent = document.getElementById(id);
-    let WinPrint = window.open(
-      "",
-      "",
-      "left=0,top=0,width=1000,height=1200,toolbar=0,scrollbars=0,status=0"
-    );
-    WinPrint.document.write(prtContent.innerHTML);
-    WinPrint.document.close();
-    WinPrint.focus();
-    WinPrint.print();
-    WinPrint.close();
+    const input = document.getElementById(id);
+    html2canvas(input).then((canvas) => {
+      var imgWidth = 200;
+      var imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      var position = 0;
+      pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
+      pdf.save("download.pdf");
+    });
   };
 
   calculateAccruedRights = (bookPrice, salesQuantity, percentage) => {
@@ -62,7 +64,6 @@ class ResultTable extends Component {
               </tr>
             </table>
           </div>
-          <h2 className="liquidacion-details">DETALLES DE LA LIQUIDACIÓN:</h2>
           <table className="table-results">
             <tr className="table-r-results">
               <th className="table-h-results">ISBN</th>

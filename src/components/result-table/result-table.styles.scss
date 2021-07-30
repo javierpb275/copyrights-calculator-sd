@@ -1,7 +1,5 @@
-.liquidacion-details {
-  text-align: center;
-  color: white;
-  -webkit-text-stroke: 2px black; /* width and color */
+#result-table {
+  padding-top: 40px;
 }
 
 .table-results {
@@ -16,7 +14,7 @@
 .table-results .table-d-results,
 .table-results .table-h-results {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 13px;
 }
 
 .table-results .table-r-results {
@@ -24,8 +22,8 @@
 }
 
 .table-results .table-h-results {
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 13px;
+  padding-bottom: 17px;
   text-align: center;
   background-color: #aa0412;
   color: white;
