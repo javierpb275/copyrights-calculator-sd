@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import "./result-table.styles.scss";
 import CustomButton from "../custom-button/custom-button.component";
+//redux:
+import { connect } from "react-redux";
 //for download pdf:
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
 class ResultTable extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   printPdf = (id) => {
     const input = document.getElementById(id);
     html2canvas(input).then((canvas) => {
@@ -30,14 +27,14 @@ class ResultTable extends Component {
   };
 
   calculateTotal = () => {
-    const { tableData } = this.props;
+    const { currentTableData } = this.props;
     let result = 0;
     let accruedRights = 0;
-    for (const selectedProduct of tableData.selectedProducts) {
+    for (const selectedProduct of currentTableData.selectedProducts) {
       accruedRights = this.calculateAccruedRights(
         selectedProduct.precio,
         selectedProduct.cantidad,
-        tableData.percentage
+        currentTableData.percentage
       );
       result += accruedRights;
     }
@@ -45,7 +42,7 @@ class ResultTable extends Component {
   };
 
   render() {
-    const { tableData } = this.props;
+    const { currentTableData } = this.props;
     return (
       <div>
         <div id="result-table">
@@ -56,10 +53,11 @@ class ResultTable extends Component {
                 <th className="table-h-results">PERIODO DE LIQUIDACIÓN</th>
               </tr>
               <tr className="table-r-results">
-                <td className="table-d-results">{tableData.authorName}</td>
                 <td className="table-d-results">
-                  {tableData.startDate.split("-").reverse().join("/")} -{" "}
-                  {tableData.endDate.split("-").reverse().join("/")}
+                  {currentTableData.authorName}
+                </td>
+                <td className="table-d-results">
+                  {currentTableData.startDate} - {currentTableData.endDate}
                 </td>
               </tr>
             </table>
@@ -73,7 +71,7 @@ class ResultTable extends Component {
               <th className="table-h-results">PORCENTAGE</th>
               <th className="table-h-results">DERECHOS DEVENGADOS</th>
             </tr>
-            {tableData.selectedProducts.map((selectedProduct) => (
+            {currentTableData.selectedProducts.map((selectedProduct) => (
               <tr key={selectedProduct.id} className="table-r-results">
                 <td className="table-d-results">
                   {selectedProduct.referencia}
@@ -83,12 +81,14 @@ class ResultTable extends Component {
                 </td>
                 <td className="table-d-results">{selectedProduct.precio}€</td>
                 <td className="table-d-results">{selectedProduct.cantidad}</td>
-                <td className="table-d-results">{tableData.percentage}%</td>
+                <td className="table-d-results">
+                  {currentTableData.percentage}%
+                </td>
                 <td className="table-d-results">
                   {this.calculateAccruedRights(
                     selectedProduct.precio,
                     selectedProduct.cantidad,
-                    tableData.percentage
+                    currentTableData.percentage
                   ).toFixed(2)}
                   €
                 </td>
@@ -118,4 +118,8 @@ class ResultTable extends Component {
   }
 }
 
-export default ResultTable;
+const mapStateToProps = (state) => ({
+  currentTableData: state.tableData.currentTableData,
+});
+
+export default connect(mapStateToProps)(ResultTable);
