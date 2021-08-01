@@ -29,13 +29,8 @@ class DataTable extends Component {
       this.setState({ products: data });
 
       const { products } = this.state;
-      const {selectedProducts, addItem} = this.props;
-      const repeatedProduct = selectedProducts.find(
-        (selectedProduct) => selectedProduct.referencia === isbn
-      );
-      if (repeatedProduct) {
-        return alert("Ese ISBN ya fue añadido.");
-      } else {
+      const { addItem} = this.props;
+      
         const foundProduct = products.find(
           (product) => product.referencia === isbn
         );
@@ -46,7 +41,7 @@ class DataTable extends Component {
         } else {
           addItem(foundProduct);
         }
-      }
+      
     } catch (error) {
       console.log("ERROR!", error);
     }

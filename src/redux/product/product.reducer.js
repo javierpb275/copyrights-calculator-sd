@@ -1,4 +1,5 @@
 import { ProductActionTypes } from "./product.types";
+import { addItemToSelectedProducts } from "./product.utils";
 
 const INITIAL_STATE = {
   selectedProducts: [],
@@ -14,7 +15,7 @@ const productReducer = (state = INITIAL_STATE, action) => {
     case ProductActionTypes.ADD_ITEM:
         return {
           ...state,
-          selectedProducts: [...state.selectedProducts, action.payload],
+          selectedProducts: addItemToSelectedProducts(state.selectedProducts, action.payload),
         };
     default:
       return state;
