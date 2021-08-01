@@ -5,6 +5,8 @@ import CustomInput from "../custom-input/custom-input.component";
 import CustomOrderList from "../custom-order-list/custom-order-list.component";
 import Scroll from "../scroll/scroll.component";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { setCurrentTableData } from "../../redux/table-data/table-data.actions";
 
 class DataTable extends Component {
   constructor(props) {
@@ -68,6 +70,17 @@ class DataTable extends Component {
     }
   };
 
+  setTableData = (data) => {
+    const { setCurrentTableData } = this.props;
+    setCurrentTableData({
+      authorName: data.authorName,
+      percentage: data.percentage,
+      selectedProducts: data.selectedProducts,
+      startDate: data.startDate,
+      endDate: data.endDate,
+    });
+  };
+
   render() {
     const {
       isbn,
@@ -77,7 +90,7 @@ class DataTable extends Component {
       startDate,
       endDate,
     } = this.state;
-    const { loadTableData, history, match } = this.props;
+    const { history, match } = this.props;
     return (
       <div className="data-table">
         <table className="table-data">
@@ -139,7 +152,7 @@ class DataTable extends Component {
         >
           <CustomButton
             buttonName={"CALCULAR"}
-            handleClick={loadTableData}
+            handleClick={this.setTableData}
             argument={{
               authorName,
               percentage,
@@ -154,4 +167,8 @@ class DataTable extends Component {
   }
 }
 
-export default withRouter(DataTable);
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentTableData: (tableData) => dispatch(setCurrentTableData(tableData)),
+});
+
+export default connect(null, mapDispatchToProps)(withRouter(DataTable));
