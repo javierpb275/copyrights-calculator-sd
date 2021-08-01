@@ -7,6 +7,7 @@ import Scroll from "../scroll/scroll.component";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentTableData } from "../../redux/table-data/table-data.actions";
+import { setSelectedProducts } from "../../redux/product/product.actions";
 
 class DataTable extends Component {
   constructor(props) {
@@ -14,7 +15,6 @@ class DataTable extends Component {
     this.state = {
       authorName: "",
       percentage: 0,
-      selectedProducts: [],
       startDate: "",
       endDate: "",
       isbn: "",
@@ -28,7 +28,8 @@ class DataTable extends Component {
       const data = await response.json();
       this.setState({ products: data });
 
-      const { selectedProducts, products } = this.state;
+      const { products } = this.state;
+      const {selectedProducts, setSelectedProducts} = this.props;
       const repeatedProduct = selectedProducts.find(
         (selectedProduct) => selectedProduct.referencia === isbn
       );
@@ -43,9 +44,9 @@ class DataTable extends Component {
             "No se ha encontrado el libro que hace referencia al ISBN introducido."
           );
         } else {
-          this.setState({
-            selectedProducts: [...selectedProducts, ...[foundProduct]],
-          });
+          setSelectedProducts(
+             [...selectedProducts, ...[foundProduct]],
+          );
         }
       }
     } catch (error) {
@@ -58,7 +59,7 @@ class DataTable extends Component {
   };
 
   onDatesChange = (e) => {
-    if (this.state.selectedProducts.length) {
+    if (this.props.selectedProducts.length) {
       if (e.target.name === "startDate") {
         e.target.value = this.state.startDate;
       } else if (e.target.name === "endDate") {
@@ -86,11 +87,10 @@ class DataTable extends Component {
       isbn,
       authorName,
       percentage,
-      selectedProducts,
       startDate,
       endDate,
     } = this.state;
-    const { history, match } = this.props;
+    const { history, match, selectedProducts } = this.props;
     return (
       <div className="data-table">
         <table className="table-data">
@@ -167,8 +167,13 @@ class DataTable extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentTableData: (tableData) => dispatch(setCurrentTableData(tableData)),
+const mapStateToProps = (state) => ({
+  selectedProducts: state.product.selectedProducts,
 });
 
-export default connect(null, mapDispatchToProps)(withRouter(DataTable));
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentTableData: (tableData) => dispatch(setCurrentTableData(tableData)),
+  setSelectedProducts: (selectedProducts) => dispatch(setSelectedProducts(selectedProducts))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DataTable));
