@@ -118,8 +118,8 @@ class ResultTable extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentTableData: state.tableData.currentTableData,
+const mapStateToProps = ({tableData: {currentTableData}}) => ({
+  currentTableData,
 });
 
 export default connect(mapStateToProps)(ResultTable);

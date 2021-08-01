@@ -167,8 +167,8 @@ class DataTable extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  selectedProducts: state.product.selectedProducts,
+const mapStateToProps = ({product: {selectedProducts}}) => ({
+  selectedProducts,
 });
 
 const mapDispatchToProps = (dispatch) => ({
