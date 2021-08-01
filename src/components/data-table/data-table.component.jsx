@@ -7,7 +7,7 @@ import Scroll from "../scroll/scroll.component";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentTableData } from "../../redux/table-data/table-data.actions";
-import { setSelectedProducts } from "../../redux/product/product.actions";
+import { addItem } from "../../redux/product/product.actions";
 
 class DataTable extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class DataTable extends Component {
       this.setState({ products: data });
 
       const { products } = this.state;
-      const {selectedProducts, setSelectedProducts} = this.props;
+      const {selectedProducts, addItem} = this.props;
       const repeatedProduct = selectedProducts.find(
         (selectedProduct) => selectedProduct.referencia === isbn
       );
@@ -44,9 +44,7 @@ class DataTable extends Component {
             "No se ha encontrado el libro que hace referencia al ISBN introducido."
           );
         } else {
-          setSelectedProducts(
-             [...selectedProducts, ...[foundProduct]],
-          );
+          addItem(foundProduct);
         }
       }
     } catch (error) {
@@ -173,7 +171,7 @@ const mapStateToProps = ({product: {selectedProducts}}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentTableData: (tableData) => dispatch(setCurrentTableData(tableData)),
-  setSelectedProducts: (selectedProducts) => dispatch(setSelectedProducts(selectedProducts))
+  addItem: (item) => dispatch(addItem(item))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DataTable));

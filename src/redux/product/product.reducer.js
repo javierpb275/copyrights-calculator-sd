@@ -11,6 +11,11 @@ const productReducer = (state = INITIAL_STATE, action) => {
         ...state,
         selectedProducts: action.payload,
       };
+    case ProductActionTypes.ADD_ITEM:
+        return {
+          ...state,
+          selectedProducts: [...state.selectedProducts, action.payload],
+        };
     default:
       return state;
   }
