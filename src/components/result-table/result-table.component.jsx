@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./result-table.styles.scss";
 import CustomButton from "../custom-button/custom-button.component";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentTableData } from "../../redux/table-data/table-data.selectors";
 //redux:
 import { connect } from "react-redux";
 //for download pdf:
@@ -118,8 +120,8 @@ class ResultTable extends Component {
   }
 }
 
-const mapStateToProps = ({tableData: {currentTableData}}) => ({
-  currentTableData,
+const mapStateToProps = createStructuredSelector({
+  currentTableData: selectCurrentTableData,
 });
 
 export default connect(mapStateToProps)(ResultTable);

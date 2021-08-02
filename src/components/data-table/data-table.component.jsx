@@ -8,7 +8,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentTableData } from "../../redux/table-data/table-data.actions";
 import { addItem } from "../../redux/product/product.actions";
-import { selectSelectedProductsCount } from "../../redux/product/product.selectors";
+import { selectSelectedProductsCount, selectSelectedProducts } from "../../redux/product/product.selectors";
+import { createStructuredSelector } from "reselect";
 
 class DataTable extends Component {
   constructor(props) {
@@ -153,9 +154,9 @@ class DataTable extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  selectedProducts: state.product.selectedProducts,
-  selectedProductsCount: selectSelectedProductsCount(state)
+const mapStateToProps = createStructuredSelector({
+  selectedProducts: selectSelectedProducts,
+  selectedProductsCount: selectSelectedProductsCount
 });
 
 const mapDispatchToProps = (dispatch) => ({
