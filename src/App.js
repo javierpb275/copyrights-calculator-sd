@@ -5,7 +5,6 @@ import Result from "./pages/result/result.component";
 import Header from "./components/header/header.component";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { setCurrentTableData } from "./redux/table-data/table-data.actions";
 
 class App extends Component {
   render() {
@@ -26,8 +25,4 @@ const mapstateToProps = ({ tableData }) => ({
   currentTableData: tableData.currentTableData
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentTableData: (tableData) => dispatch(setCurrentTableData(tableData)),
-});
-
-export default connect(mapstateToProps, mapDispatchToProps)(App);
+export default connect(mapstateToProps)(App);

@@ -64,17 +64,6 @@ class DataTable extends Component {
     }
   };
 
-  setTableData = (data) => {
-    const { setCurrentTableData } = this.props;
-    setCurrentTableData({
-      authorName: data.authorName,
-      percentage: data.percentage,
-      selectedProducts: data.selectedProducts,
-      startDate: data.startDate,
-      endDate: data.endDate,
-    });
-  };
-
   render() {
     const {
       isbn,
@@ -83,7 +72,7 @@ class DataTable extends Component {
       startDate,
       endDate,
     } = this.state;
-    const { history, match, selectedProducts } = this.props;
+    const { history, match, selectedProducts, setCurrentTableData } = this.props;
     return (
       <div className="data-table">
         <table className="table-data">
@@ -145,7 +134,7 @@ class DataTable extends Component {
         >
           <CustomButton
             buttonName={"CALCULAR"}
-            handleClick={this.setTableData}
+            handleClick={setCurrentTableData}
             argument={{
               authorName,
               percentage,
