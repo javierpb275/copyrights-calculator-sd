@@ -74,7 +74,7 @@ class DataTable extends Component {
       startDate,
       endDate,
     } = this.state;
-    const { history, match, selectedProducts, setCurrentTableData, selectedProductsCount, dispatch } = this.props;
+    const { history, match, selectedProducts, setCurrentTableData, selectedProductsCount, /* dispatch */ } = this.props;//dispatch automatically passed if we do not provide mapDispatchToProps in connect()
     return (
       <div className="data-table">
         <table className="table-data">
