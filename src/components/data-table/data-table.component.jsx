@@ -164,4 +164,4 @@ const mapDispatchToProps = (dispatch) => ({
   addItem: (item) => dispatch(addItem(item))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DataTable));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DataTable));
