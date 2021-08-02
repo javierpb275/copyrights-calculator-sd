@@ -74,7 +74,7 @@ class DataTable extends Component {
       startDate,
       endDate,
     } = this.state;
-    const { history, match, selectedProducts, setCurrentTableData, selectedProductsCount } = this.props;
+    const { history, match, selectedProducts, setCurrentTableData, selectedProductsCount, dispatch } = this.props;
     return (
       <div className="data-table">
         <table className="table-data">
@@ -139,6 +139,10 @@ class DataTable extends Component {
         >
           <CustomButton
             buttonName={"CALCULAR"}
+            /* onClick={() => {
+              history.push(`${match.url}resultado`);
+              dispatch(setCurrentTableData({authorName, percentage, selectedProducts, startDate, endDate}))
+            }} */
             handleClick={setCurrentTableData}
             argument={{
               authorName,
