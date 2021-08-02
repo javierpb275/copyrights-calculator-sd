@@ -9,3 +9,8 @@ export const addItem = item => ({
     type: ProductActionTypes.ADD_ITEM,
     payload: item
 });
+
+export const clearItem= item => ({
+  type: ProductActionTypes.CLEAR_ITEM,
+  payload: item
+});

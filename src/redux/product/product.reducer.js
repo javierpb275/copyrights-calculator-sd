@@ -13,10 +13,21 @@ const productReducer = (state = INITIAL_STATE, action) => {
         selectedProducts: action.payload,
       };
     case ProductActionTypes.ADD_ITEM:
-        return {
-          ...state,
-          selectedProducts: addItemToSelectedProducts(state.selectedProducts, action.payload),
-        };
+      return {
+        ...state,
+        selectedProducts: addItemToSelectedProducts(
+          state.selectedProducts,
+          action.payload
+        ),
+      };
+    case ProductActionTypes.CLEAR_ITEM:
+      return {
+        ...state,
+        selectedProducts: state.selectedProducts.filter(
+          (selectedProduct) =>
+            selectedProduct.referencia !== action.payload.referencia
+        ),
+      };
     default:
       return state;
   }

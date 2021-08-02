@@ -1,4 +1,5 @@
 export const ProductActionTypes = {
   SET_SELECTED_PRODUCTS: "SET_SELECTED_PRODUCTS",
-  ADD_ITEM: 'ADD_ITEM'
+  ADD_ITEM: 'ADD_ITEM',
+  CLEAR_ITEM: 'CLEAR_ITEM'
 };
