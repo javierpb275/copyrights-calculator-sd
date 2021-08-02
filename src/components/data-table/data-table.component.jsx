@@ -8,6 +8,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentTableData } from "../../redux/table-data/table-data.actions";
 import { addItem } from "../../redux/product/product.actions";
+import { selectSelectedProductsCount } from "../../redux/product/product.selectors";
 
 class DataTable extends Component {
   constructor(props) {
@@ -72,7 +73,7 @@ class DataTable extends Component {
       startDate,
       endDate,
     } = this.state;
-    const { history, match, selectedProducts, setCurrentTableData } = this.props;
+    const { history, match, selectedProducts, setCurrentTableData, selectedProductsCount } = this.props;
     return (
       <div className="data-table">
         <table className="table-data">
@@ -127,6 +128,9 @@ class DataTable extends Component {
               <CustomOrderList items={selectedProducts} />
             </Scroll>
           </tr>
+          <tr className="table-r-data">
+            NÚMERO DE LIBROS AÑADIDOS: {selectedProductsCount}
+          </tr>
         </table>
         <div
           className="calculate-button"
@@ -149,8 +153,9 @@ class DataTable extends Component {
   }
 }
 
-const mapStateToProps = ({product: {selectedProducts}}) => ({
-  selectedProducts,
+const mapStateToProps = (state) => ({
+  selectedProducts: state.product.selectedProducts,
+  selectedProductsCount: selectSelectedProductsCount(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
