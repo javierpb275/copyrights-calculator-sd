@@ -8,8 +8,14 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentTableData } from "../../redux/table-data/table-data.actions";
 import { addItem } from "../../redux/product/product.actions";
-import { selectSelectedProductsCount, selectSelectedProducts } from "../../redux/product/product.selectors";
+import {
+  selectSelectedProductsCount,
+  selectSelectedProducts,
+} from "../../redux/product/product.selectors";
 import { createStructuredSelector } from "reselect";
+import WithLoading from "../with-loading/with-loading.component";
+
+const CustomOrderListWithLoading = WithLoading(CustomOrderList);
 
 class DataTable extends Component {
   constructor(props) {
@@ -21,29 +27,33 @@ class DataTable extends Component {
       endDate: "",
       isbn: "",
       products: [],
+      loading: false,
     };
   }
 
   addProductByIsbn = async (isbn) => {
     try {
+      this.setState({ loading: true });
       const response = await fetch(`./products.json`);
       const data = await response.json();
       this.setState({ products: data });
 
       const { products } = this.state;
-      const { addItem} = this.props;
-      
-        const foundProduct = products.find(
-          (product) => product.referencia === isbn
+      const { addItem } = this.props;
+
+      const foundProduct = products.find(
+        (product) => product.referencia === isbn
+      );
+
+      this.setState({ loading: false });
+
+      if (!foundProduct) {
+        return alert(
+          "No se ha encontrado el libro que hace referencia al ISBN introducido."
         );
-        if (!foundProduct) {
-          return alert(
-            "No se ha encontrado el libro que hace referencia al ISBN introducido."
-          );
-        } else {
-          addItem(foundProduct);
-        }
-      
+      } else {
+        addItem(foundProduct);
+      }
     } catch (error) {
       console.log("ERROR!", error);
     }
@@ -67,14 +77,15 @@ class DataTable extends Component {
   };
 
   render() {
+    const { isbn, authorName, percentage, startDate, endDate, loading } =
+      this.state;
     const {
-      isbn,
-      authorName,
-      percentage,
-      startDate,
-      endDate,
-    } = this.state;
-    const { history, match, selectedProducts, setCurrentTableData, selectedProductsCount, /* dispatch */ } = this.props;//dispatch automatically passed if we do not provide mapDispatchToProps in connect()
+      history,
+      match,
+      selectedProducts,
+      setCurrentTableData,
+      selectedProductsCount /* dispatch */,
+    } = this.props; //dispatch automatically passed if we do not provide mapDispatchToProps in connect()
     return (
       <div className="data-table">
         <table className="table-data">
@@ -126,7 +137,10 @@ class DataTable extends Component {
               argument={isbn}
             />
             <Scroll>
-              <CustomOrderList items={selectedProducts} />
+              <CustomOrderListWithLoading
+                isLoading={loading}
+                items={selectedProducts}
+              />
             </Scroll>
           </tr>
           <tr className="table-r-data">
@@ -160,12 +174,14 @@ class DataTable extends Component {
 
 const mapStateToProps = createStructuredSelector({
   selectedProducts: selectSelectedProducts,
-  selectedProductsCount: selectSelectedProductsCount
+  selectedProductsCount: selectSelectedProductsCount,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentTableData: (tableData) => dispatch(setCurrentTableData(tableData)),
-  addItem: (item) => dispatch(addItem(item))
+  addItem: (item) => dispatch(addItem(item)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DataTable));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(DataTable)
+);
