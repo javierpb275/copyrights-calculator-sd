@@ -35,9 +35,9 @@ class DataTable extends Component {
   }
 
   addProductByIsbn = async (isbn) => {
-    const { addItem, products, fetchProductsAsync } = this.props;
+    const { addItem, fetchProductsAsync } = this.props;
 
-    fetchProductsAsync(book);
+    const products = await fetchProductsAsync();
 
     const foundProduct = products.find(
       (product) => product.referencia === isbn
@@ -48,6 +48,7 @@ class DataTable extends Component {
         "No se ha encontrado el libro que hace referencia al ISBN introducido."
       );
     } else {
+      //foundProduct.cantidad = 100;
       addItem(foundProduct);
     }
   };

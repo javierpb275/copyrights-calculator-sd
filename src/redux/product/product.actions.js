@@ -15,16 +15,6 @@ export const clearItem = (item) => ({
   payload: item,
 });
 
-export const addItem = (item) => ({
-  type: ProductActionTypes.ADD_ITEM,
-  payload: item,
-});
-
-export const clearItem = (item) => ({
-  type: ProductActionTypes.CLEAR_ITEM,
-  payload: item,
-});
-
 export const fetchProductsStart = () => ({
   type: ProductActionTypes.FETCH_PRODUCTS_START,
 });
@@ -48,6 +38,9 @@ export const fetchProductsAsync = () => {
       const products = await response.json();
 
       dispatch(fetchProductsSuccess(products));
+
+      return products;
+
     } catch (e) {
       dispatch(fetchProductsFailure(e.message));
     }
