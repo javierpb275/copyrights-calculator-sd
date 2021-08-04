@@ -11,7 +11,18 @@ export const selectSelectedProductsCount = createSelector(
   [selectSelectedProducts],
   (selectedProducts) =>
     selectedProducts.reduce(
-      (counter, selectedProduct) => (selectedProduct ? counter+=1 : counter),
+      (counter, selectedProduct) =>
+        selectedProduct ? (counter += 1) : counter,
       0
     )
+);
+
+export const selectIsProductsFetching = createSelector(
+  [selectProduct],
+  (product) => product.isFetching
+);
+
+export const selectIsProductsLoading = createSelector(
+  [selectProduct],
+  (product) => !!product.products
 );
