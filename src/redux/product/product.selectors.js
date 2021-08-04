@@ -7,6 +7,11 @@ export const selectSelectedProducts = createSelector(
   (product) => product.selectedProducts
 );
 
+export const selectProducts = createSelector(
+  [selectProduct],
+  (product) => product.products
+);
+
 export const selectSelectedProductsCount = createSelector(
   [selectSelectedProducts],
   (selectedProducts) =>
