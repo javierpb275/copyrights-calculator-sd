@@ -1,7 +1,7 @@
 import React from "react";
 import "./custom-input.styles.scss";
 
-const CustomInput = ({ inputType, inputPlaceholder, inputName, handleChange }) => {
+const CustomInput = ({ inputType, inputPlaceholder, inputName, handleChange, inputValue }) => {
   return (
     <input
       className="custom-input"
@@ -9,6 +9,7 @@ const CustomInput = ({ inputType, inputPlaceholder, inputName, handleChange }) =
       name={inputName}
       placeholder={inputPlaceholder}
       onChange={handleChange}
+      value={inputValue}
     />
   );
 };
