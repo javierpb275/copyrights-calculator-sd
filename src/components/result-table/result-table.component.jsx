@@ -4,6 +4,7 @@ import CustomButton from "../custom-button/custom-button.component";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentTableData } from "../../redux/table-data/table-data.selectors";
 import { Link } from "react-router-dom";
+import editorialColexLogo from "../../assets/logos/editorial-colex-logo.png";
 //redux:
 import { connect } from "react-redux";
 //for download pdf:
@@ -44,11 +45,31 @@ class ResultTable extends Component {
     return result;
   };
 
+  generateTodaysDate = () => {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+    today = dd + "/" + mm + "/" + yyyy;
+    return today;
+  };
+
   render() {
     const { currentTableData } = this.props;
     return (
       <div>
         <div id="result-table">
+          <div className="logo-date">
+            <div className="logo">
+              <img
+                alt="editorial-colex-logo"
+                className="editorial-colex-logo"
+                src={editorialColexLogo}
+                width="300px"
+              />
+            </div>
+            <div className="date">{this.generateTodaysDate()}</div>
+          </div>
           <div className="author-dates-table-container">
             <table className="table-results">
               <tr className="table-r-results">
