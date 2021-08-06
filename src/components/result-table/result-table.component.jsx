@@ -14,6 +14,7 @@ import html2canvas from "html2canvas";
 class ResultTable extends Component {
   printPdf = (id) => {
     const input = document.getElementById(id);
+    window.scrollTo(0, 0); // <-- this scrolls up to the top
     html2canvas(input).then((canvas) => {
       var imgWidth = 200;
       var imgHeight = (canvas.height * imgWidth) / canvas.width;
