@@ -3,6 +3,7 @@ import "./result-table.styles.scss";
 import CustomButton from "../custom-button/custom-button.component";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentTableData } from "../../redux/table-data/table-data.selectors";
+import { Link } from "react-router-dom";
 //redux:
 import { connect } from "react-redux";
 //for download pdf:
@@ -108,12 +109,23 @@ class ResultTable extends Component {
             </tr>
           </table>
         </div>
-        <div className="pdf-button">
-          <CustomButton
-            buttonName={"PDF"}
-            handleClick={this.printPdf}
-            argument={"result-table"}
-          />
+        <div className="buttons">
+          <div className="back-button">
+            <Link to="/">
+              <CustomButton
+                buttonName={"ATRÁS"}
+                handleClick={(atras) => console.log(atras)}
+                argument={"atras"}
+              />
+            </Link>
+          </div>
+          <div className="pdf-button">
+            <CustomButton
+              buttonName={"PDF"}
+              handleClick={this.printPdf}
+              argument={"result-table"}
+            />
+          </div>
         </div>
       </div>
     );

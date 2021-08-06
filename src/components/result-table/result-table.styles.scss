@@ -29,7 +29,12 @@
   color: white;
 }
 
-.pdf-button {
-  margin-top: 3%;
+.buttons {
   text-align: center;
+}
+
+.back-button,
+.pdf-button {
+  display: inline-block;
+  margin: 3%;
 }

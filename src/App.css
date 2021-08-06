@@ -1,10 +1,11 @@
 .App {
   margin: 0;
   font-family: "Archivo Black", sans-serif;
-  background: url("../src/assets/images/library-background.jpg") no-repeat
-    center center fixed;
+  background: url("../src/assets/images/library-unsplash.jpg") no-repeat center
+    center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  opacity: 0.9;
 }
