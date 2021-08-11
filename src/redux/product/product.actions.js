@@ -34,7 +34,7 @@ export const fetchProductsAsync = () => {
     try {
       dispatch(fetchProductsStart());
 
-      const response = await fetch(`./products.json`);
+      const response = await fetch(process.env.REACT_APP_MOCK_API_URL);
       const products = await response.json();
 
       dispatch(fetchProductsSuccess(products));
